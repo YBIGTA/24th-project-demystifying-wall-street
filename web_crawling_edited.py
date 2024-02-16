@@ -29,7 +29,7 @@ def url_parser(url):
     user_url = url.split('/')
     keyword = user_url[2].split('.')
 
-    if 'bloomberg' in keyword:
+    if 'bloomberg' or 'reuters' in keyword:
         blb_news = zenrows(url)
         return blb_news
     elif 'yahoo' in keyword:
@@ -55,7 +55,7 @@ def zenrows(url):
 
     news = {
         "title": soup.find("h1").text,
-        "text": " ".join([p.text for p in soup.find_all('p')])
+        "text": " ".join([p.text for p in soup.find_all('p')]).replace('\n', ' ').replace('\\', '')
     }
 
     return news
@@ -80,6 +80,7 @@ def apify_news(url):
             "title": item['title'],
             "text": item['text']
         }
+
     return news
 
 
@@ -97,9 +98,11 @@ def normal_requests(url):
         soup = BeautifulSoup(response.text, "html.parser")
         news = {
         "title": soup.find("h1").text,
-        "text": " ".join([p.text for p in soup.find_all('p')])
+        "text": " ".join([p.text for p in soup.find_all('p')]).replace('\n', ' ').replace('\\', '')
     }
         return news
     else:
         print(f"Error: {response.status_code} and {response.text}")
+
+
     
