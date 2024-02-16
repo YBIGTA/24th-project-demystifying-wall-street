@@ -1,5 +1,47 @@
-<main>
-    <div>
-        <p>{{hello}}</p>
-    </div>
-</main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 수정</title>
+</head>
+<body>
+    <main>
+        <div>
+            <label for="inputString">URL:</label>
+            <input type="text" id="inputString">
+            <button onclick="fetchData()">CLICK</button>
+        </div>
+        <div id="result"></div>
+    </main>
+
+    <script>
+        function fetchData() {
+            var inputString = document.getElementById("inputString").value;
+            var url = '/answer/';
+            var data = { "url": inputString };
+            
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}' 
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                var resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = `
+                    <p>news: ${data.news}</p>
+                    <p>summery: ${data.summary}</p>
+                    <p>economic_terminologies: ${data.economic_terminologies}</p>
+                `;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
