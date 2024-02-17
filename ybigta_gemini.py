@@ -1,23 +1,10 @@
 # -*- coding: utf-8 -*-
-"""
-Original file is located at
-    https://colab.research.google.com/drive/12oUVuAWDzlA4Vid4nCEq8vMsdqQvAazZ
-
-참고한 블로그:
-https://yunwoong.tistory.com/297
-
-GenerativeModel document: 
-https://cloud.google.com/vertex-ai/docs/generative-ai/multimodal/sdk-for-gemini/gemini-sdk-overview?hl=ko&_ga=2.138801011.-170244440.1707497421
-
-Vertex AI Platform:
-https://console.cloud.google.com/welcome/new?project=ybigta-414314
-"""
-
 # pip install "google-cloud-aiplatform>=1.38"
+
 
 import os
 import vertexai
-from vertexai.preview.generative_models import GenerativeModel, Part
+from vertexai.preview.generative_models import GenerativeModel
 import vertexai.preview.generative_models as generative_models
 from typing import List, Dict
 
@@ -27,6 +14,8 @@ project_id = "ybigta-414314"
 location = "asia-northeast3"  # 한국 서울
 
 vertexai.init(project=project_id, location=location)
+
+model = GenerativeModel("gemini-pro")
 
 
 def summarize(news_article: str) -> str:
@@ -39,9 +28,6 @@ def summarize(news_article: str) -> str:
     Returns:
     - str: The summary of the financial news article.
     """
-
-    # Instantiate the TextGenerationModel
-    model = GenerativeModel("gemini-pro")
 
     # Generate content
     responses = model.generate_content(
@@ -126,9 +112,6 @@ def detect_economic_terms(news_article: str) -> List[str]:
                 ###
                 """
 
-    # Instantiate the TextGenerationModel
-    model = GenerativeModel("gemini-pro")  # NER 고려 필요
-
     # Generate content
     generated_content = model.generate_content(prompt).text
 
@@ -151,8 +134,6 @@ def get_economic_term_definitions(news_article: str, summary: str, economic_term
     Returns:
     - List[str]: List of definitions for each economic term.
     """
-    # Instantiate the TextGenerationModel
-    model = GenerativeModel("gemini-pro")
 
     economic_terms_string = '\n'.join(economic_terms)
 
@@ -233,8 +214,6 @@ def get_economic_term_definitions(news_article: str, summary: str, economic_term
     definitions = [definition.strip()
                    for definition in generated_content.split('\n')]
 
-    print("terms\n", economic_terms, "\n", len(economic_terms))
-    print("definitions\n", definitions, "\n", len(definitions))
     # Check if the number of generated definitions matches the number of economic terms
     if len(definitions) != len(economic_terms):
         raise ValueError(
@@ -243,6 +222,16 @@ def get_economic_term_definitions(news_article: str, summary: str, economic_term
 
 
 def start(news_article: str) -> Dict[str, List[str]]:
+    """
+    Starts the process of summarizing a financial news article, detecting economic terms, and getting definitions for the terms.
+
+    Parameters:
+    - news_article (str): The financial news article.
+
+    Returns:
+    - Dict[str, List[str]]: A dictionary containing the summary, economic terms, and definitions.
+    """
+
     summary = summarize(news_article)
     terms = detect_economic_terms(news_article)
     definitions = get_economic_term_definitions(news_article, summary, terms)
@@ -252,35 +241,3 @@ def start(news_article: str) -> Dict[str, List[str]]:
 
 news = input("news article: ")
 summary, terms, definitions = start(news)
-
-
-# ------------------------------------------------------------
-"""##TODO
-1. zero-shot, one-shot, few-shot 시도
-3.  `detect_economic_terms()`에서 NER 고려해보기.
-
-"""
-
-
-# NER 사용
-'''import spacy
-from vertexai.language_models import TextGenerationModel
-
-def detect_economic_terms(news_article: str) -> List[str]:
-    """
-    Detects economic terms in a financial news article.
-
-    Parameters:
-    - news_article (str): The financial news article.
-
-    Returns:
-    - list: List of detected economic terms.
-    """
-    # Simple example: Use spaCy for named entity recognition
-    nlp = spacy.load("en_core_web_sm")
-    doc = nlp(news_article)
-
-    # Extract economic terms (e.g., organizations or monetary values)
-    economic_terms = [entity.text for entity in doc.ents if entity.label_ in ["ORG", "MONEY"]]
-
-    return economic_terms'''
