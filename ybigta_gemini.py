@@ -31,9 +31,8 @@ def summarize(news_article: str) -> str:
 
     # Generate content
     responses = model.generate_content(
-        f"""Provide a brief summary for the following article:
+        f"""<<Provide a brief summary for the following economic article>>
 
-        Example 1
         Input:
         Emerging markets soared more than 33 percent in 2017, and Todd Gordon of TradingAnalysis.com says the rally won't stop. A big part of the rally in emerging markets, tracked by the emerging market ETF EEM , was a weak dollar. And given that Gordon still sees the inverse relationship between EEM and the dollar, measured in his charts by the dollar-tracking ETF UUP , he believes the U.S. currency will continue to help the group. "We have a falling U.S. dollar, which will support international and emerging market currencies and will give those EEM stocks a boost," Gordon said Tuesday on CNBC's "Trading Nation." The U.S. dollar in 2017 posted its worst annual performance in 14 years, while EEM saw its best performance since 2013. As for how high the latter could go, Gordon says EEM has broken "resistance" at around $45, which was the ETF's 2014 highs. That $45 region is now what he calls "support," and he sees it rallying to $50, which the ETF hasn't hit since mid-2011. To play for a move higher, Gordon suggested buying the February 48/50 call spread for 72 cents, or $72 per options contract. This means that if EEM closes above $50 on Feb. 16, then Gordon could make a maximum reward of $128 on the trade. But if EEM were to close below $48, then Gordon would lose the $72 he paid for the trade. As a result, Gordon wants to establish a point at which to get out. "If the 72 cent premium we just laid out gets cut in half to about 36 cents, let's cut the trade and move on," he said. EEM started the year off strong, rallying more than 1 percent on Tuesday.
 
@@ -41,8 +40,15 @@ def summarize(news_article: str) -> str:
         ###
         The article discusses the strong performance of emerging markets in 2017, with a focus on the role of a weak U.S. dollar in driving the rally. Todd Gordon of TradingAnalysis.com suggests that the inverse relationship between the emerging market ETF (EEM) and the U.S. dollar (measured by the UUP ETF) will continue to benefit international and emerging market currencies. Gordon predicts a potential rise in EEM, citing a breakthrough in resistance at $45 and anticipates a rally to $50. He recommends an options trading strategy and sets conditions for exiting the trade. The article also mentions EEM's strong start in the current year, rallying over 1 percent on a specific day.
 
-        
 
+        Input:
+        Published: Jan 2, 2018 5:59 p.m. ET Share Few mainstream investors have bought large sums of bitcoin, scared off by concerns about cybersecurity and liquidity Getty Images By Rob Copeland One of the biggest names in Silicon Valley is placing a moonshot bet on bitcoin BTCUSD, +0.72% . Founders Fund, the venture-capital firm co-founded by Peter Thiel, has amassed hundreds of millions of dollars of the volatile cryptocurrency, people familiar with the matter said. The bet has been spread across several of the firm's most recent funds, the people said, including one that began investing in mid-2017 and made bitcoin one of its first investments. Founders and Thiel, 50 years old, are well-known for early investments in companies like Facebook Inc. FB, +2.81% that sometimes take years to come to fruition. The bitcoin bet is quickly showing promise. Founders bought around $15 million to $20 million in bitcoin, and it has told investors the firm's haul is now worth hundreds of millions of dollars after the digital currency's ripping rise in the past year. It isn't clear if Founders has sold any of its holdings yet. The bet hasn't been previously reported.
+
+        Output:
+        ###
+        The article reports that Founders Fund, a venture-capital firm co-founded by Peter Thiel, has made a significant investment in bitcoin, amounting to hundreds of millions of dollars. This investment is spread across various funds, with one of them starting to invest in mid-2017. The report suggests that the initial investment of $15-20 million has grown substantially due to bitcoin's surge in value over the past year. However, it's unclear whether Founders Fund has sold any of its bitcoin holdings at that point. This move is notable as mainstream investors have been hesitant to embrace bitcoin due to concerns about cybersecurity and liquidity.
+
+        
         Input:
         {news_article}
 
@@ -80,7 +86,9 @@ def detect_economic_terms(news_article: str) -> List[str]:
     """
 
     # Build a prompt for economic term detection
-    prompt = f"""Identify economic terms in the following financial news article.
+    prompt = f"""<<Identify economic terms in the following financial news article.
+                Provide only the terms and avoid including definitions or explanations.>>
+
                 Input:
                 Emerging markets soared more than 33 percent in 2017, and Todd Gordon of TradingAnalysis.com says the rally won't stop. A big part of the rally in emerging markets, tracked by the emerging market ETF EEM , was a weak dollar. And given that Gordon still sees the inverse relationship between EEM and the dollar, measured in his charts by the dollar-tracking ETF UUP , he believes the U.S. currency will continue to help the group. "We have a falling U.S. dollar, which will support international and emerging market currencies and will give those EEM stocks a boost," Gordon said Tuesday on CNBC's "Trading Nation." The U.S. dollar in 2017 posted its worst annual performance in 14 years, while EEM saw its best performance since 2013. As for how high the latter could go, Gordon says EEM has broken "resistance" at around $45, which was the ETF's 2014 highs. That $45 region is now what he calls "support," and he sees it rallying to $50, which the ETF hasn't hit since mid-2011. To play for a move higher, Gordon suggested buying the February 48/50 call spread for 72 cents, or $72 per options contract. This means that if EEM closes above $50 on Feb. 16, then Gordon could make a maximum reward of $128 on the trade. But if EEM were to close below $48, then Gordon would lose the $72 he paid for the trade. As a result, Gordon wants to establish a point at which to get out. "If the 72 cent premium we just laid out gets cut in half to about 36 cents, let's cut the trade and move on," he said. EEM started the year off strong, rallying more than 1 percent on Tuesday.
 
@@ -106,6 +114,24 @@ def detect_economic_terms(news_article: str) -> List[str]:
                 18. Resistance Broken
                 19. February 48/50 Call Spread
                 20. Cut the Trade
+                
+                Input:
+                Published: Jan 2, 2018 5:59 p.m. ET Share Few mainstream investors have bought large sums of bitcoin, scared off by concerns about cybersecurity and liquidity Getty Images By Rob Copeland One of the biggest names in Silicon Valley is placing a moonshot bet on bitcoin BTCUSD, +0.72% . Founders Fund, the venture-capital firm co-founded by Peter Thiel, has amassed hundreds of millions of dollars of the volatile cryptocurrency, people familiar with the matter said. The bet has been spread across several of the firm's most recent funds, the people said, including one that began investing in mid-2017 and made bitcoin one of its first investments. Founders and Thiel, 50 years old, are well-known for early investments in companies like Facebook Inc. FB, +2.81% that sometimes take years to come to fruition. The bitcoin bet is quickly showing promise. Founders bought around $15 million to $20 million in bitcoin, and it has told investors the firm's haul is now worth hundreds of millions of dollars after the digital currency's ripping rise in the past year. It isn't clear if Founders has sold any of its holdings yet. The bet hasn't been previously reported.
+
+                Output:
+                ###
+                1. Bitcoin (BTCUSD)
+                2. Venture Capital Firm
+                3. Moonshot Bet
+                4. Cybersecurity
+                5. Liquidity
+                6. Venture Capital
+                7. Investments
+                8. Facebook Inc. (FB)
+                9. Market Dynamics
+                10. Rise in Value
+                11. Holdings
+
 
                 Input:
                 {news_article}
@@ -140,11 +166,12 @@ def get_economic_term_definitions(news_article: str, summary: str, economic_term
     economic_terms_string = '\n'.join(economic_terms)
 
     # Build a prompt for definitions of multiple economic terms
-    prompt = f"""Define the following economic terms.
-                Definitions should be based on the context of the following financial news article.
+    prompt = f"""<<Define the following economic terms.
+                Definitions should be based on the context of the following economic news article.
                 The number of definitions should match the number of economic terms.
+                Provide only the definitions and avoid including the terms themselves.>>
                 
-                Example 1
+
                 Input1 (News Article):
                 Emerging markets soared more than 33 percent in 2017, and Todd Gordon of TradingAnalysis.com says the rally won't stop. A big part of the rally in emerging markets, tracked by the emerging market ETF EEM , was a weak dollar. And given that Gordon still sees the inverse relationship between EEM and the dollar, measured in his charts by the dollar-tracking ETF UUP , he believes the U.S. currency will continue to help the group. "We have a falling U.S. dollar, which will support international and emerging market currencies and will give those EEM stocks a boost," Gordon said Tuesday on CNBC's "Trading Nation." The U.S. dollar in 2017 posted its worst annual performance in 14 years, while EEM saw its best performance since 2013. As for how high the latter could go, Gordon says EEM has broken "resistance" at around $45, which was the ETF's 2014 highs. That $45 region is now what he calls "support," and he sees it rallying to $50, which the ETF hasn't hit since mid-2011. To play for a move higher, Gordon suggested buying the February 48/50 call spread for 72 cents, or $72 per options contract. This means that if EEM closes above $50 on Feb. 16, then Gordon could make a maximum reward of $128 on the trade. But if EEM were to close below $48, then Gordon would lose the $72 he paid for the trade. As a result, Gordon wants to establish a point at which to get out. "If the 72 cent premium we just laid out gets cut in half to about 36 cents, let's cut the trade and move on," he said. EEM started the year off strong, rallying more than 1 percent on Tuesday.
 
@@ -198,6 +225,40 @@ def get_economic_term_definitions(news_article: str, summary: str, economic_term
 
 
                 Input1 (News Article):
+                Published: Jan 2, 2018 5:59 p.m. ET Share Few mainstream investors have bought large sums of bitcoin, scared off by concerns about cybersecurity and liquidity Getty Images By Rob Copeland One of the biggest names in Silicon Valley is placing a moonshot bet on bitcoin BTCUSD, +0.72% . Founders Fund, the venture-capital firm co-founded by Peter Thiel, has amassed hundreds of millions of dollars of the volatile cryptocurrency, people familiar with the matter said. The bet has been spread across several of the firm's most recent funds, the people said, including one that began investing in mid-2017 and made bitcoin one of its first investments. Founders and Thiel, 50 years old, are well-known for early investments in companies like Facebook Inc. FB, +2.81% that sometimes take years to come to fruition. The bitcoin bet is quickly showing promise. Founders bought around $15 million to $20 million in bitcoin, and it has told investors the firm's haul is now worth hundreds of millions of dollars after the digital currency's ripping rise in the past year. It isn't clear if Founders has sold any of its holdings yet. The bet hasn't been previously reported.
+
+                Input2 (Summary):
+                The article reports that Founders Fund, a venture-capital firm co-founded by Peter Thiel, has made a significant investment in bitcoin, amounting to hundreds of millions of dollars. This investment is spread across various funds, with one of them starting to invest in mid-2017. The report suggests that the initial investment of $15-20 million has grown substantially due to bitcoin's surge in value over the past year. However, it's unclear whether Founders Fund has sold any of its bitcoin holdings at that point. This move is notable as mainstream investors have been hesitant to embrace bitcoin due to concerns about cybersecurity and liquidity.
+
+                Input3 (Economic Terms):
+                1. Bitcoin (BTCUSD)
+                2. Venture Capital Firm
+                3. Moonshot Bet
+                4. Cybersecurity
+                5. Liquidity
+                6. Venture Capital
+                7. Investments
+                8. Facebook Inc. (FB)
+                9. Market Dynamics
+                10. Rise in Value
+                11. Holdings
+
+                Output:
+                ###
+                1. A decentralized digital currency subject to market demand and supply dynamics.
+                2. A firm providing funding to startups or small companies in exchange for equity.
+                3. A high-risk, ambitious investment with potential for significant returns.
+                4. Measures taken to protect computer systems, networks, and data from theft, damage, or unauthorized access.
+                5. The ease with which an asset can be bought or sold in the market without affecting its price.
+                6. The provision of financial support to startups or small companies in exchange for equity.
+                7. The allocation of resources with the expectation of generating future returns.
+                8. A well-known social media company.
+                9. The impact of various factors on the behavior of markets and assets.
+                10. A significant increase in the price or value of an asset.
+                11. The assets or investments held by an individual or entity.
+
+                
+                Input1 (News Article):
                 {news_article}
 
                 Input2 (Summary):
@@ -245,3 +306,7 @@ def start(news_article: str) -> Dict[str, List[str]]:
 
 news = input("news article: ")
 summary, terms, definitions = start(news)
+
+print("Summary:", summary)
+print("Economic Terms:", terms)
+print("Definitions:", definitions)
