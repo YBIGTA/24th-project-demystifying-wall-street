@@ -306,7 +306,3 @@ def start(news_article: str) -> Dict[str, List[str]]:
 
 news = input("news article: ")
 summary, terms, definitions = start(news)
-
-print("Summary:", summary)
-print("Economic Terms:", terms)
-print("Definitions:", definitions)
