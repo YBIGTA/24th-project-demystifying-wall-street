@@ -41,6 +41,8 @@ def summarize(news_article: str) -> str:
         ###
         The article discusses the strong performance of emerging markets in 2017, with a focus on the role of a weak U.S. dollar in driving the rally. Todd Gordon of TradingAnalysis.com suggests that the inverse relationship between the emerging market ETF (EEM) and the U.S. dollar (measured by the UUP ETF) will continue to benefit international and emerging market currencies. Gordon predicts a potential rise in EEM, citing a breakthrough in resistance at $45 and anticipates a rally to $50. He recommends an options trading strategy and sets conditions for exiting the trade. The article also mentions EEM's strong start in the current year, rallying over 1 percent on a specific day.
 
+        
+
         Input:
         {news_article}
 
@@ -214,10 +216,11 @@ def get_economic_term_definitions(news_article: str, summary: str, economic_term
     definitions = [definition.strip()
                    for definition in generated_content.split('\n')]
 
-    # Check if the number of generated definitions matches the number of economic terms
+    # If the number of definitions is not equal to the number of economic terms, try again
     if len(definitions) != len(economic_terms):
-        raise ValueError(
-            "The number of generated definitions does not match the number of economic terms.")
+        print("Number of definitions does not match the number of economic terms. Trying again...")
+        definitions = get_economic_term_definitions(
+            news_article, summary, economic_terms)
     return definitions
 
 
