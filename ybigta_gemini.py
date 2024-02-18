@@ -86,26 +86,26 @@ def detect_economic_terms(news_article: str) -> List[str]:
 
                 Output:
                 ###
-                Emerging Markets
-                ETF (Exchange-Traded Fund)
-                Rally
-                Weak Dollar
-                Inverse Relationship
-                Currency
-                Resistance and Support
-                Options Contract
-                Premium
-                Maximum Reward
-                Move Higher
-                Call Spread
-                Point of Exit
-                Dollar-tracking ETF (UUP)
-                Performance
-                Annual Performance
-                Point
-                Resistance Broken
-                February 48/50 Call Spread
-                Cut the Trade
+                1. Emerging Markets
+                2. ETF (Exchange-Traded Fund)
+                3. Rally
+                4. Weak Dollar
+                5. Inverse Relationship
+                6. Currency
+                7. Resistance and Support
+                8. Options Contract
+                9. Premium
+                10. Maximum Reward
+                11. Move Higher
+                12. Call Spread
+                13. Point of Exit
+                14. Dollar-tracking ETF (UUP)
+                15. Performance
+                16. Annual Performance
+                17. Point
+                18. Resistance Broken
+                19. February 48/50 Call Spread
+                20. Cut the Trade
 
                 Input:
                 {news_article}
@@ -142,6 +142,7 @@ def get_economic_term_definitions(news_article: str, summary: str, economic_term
     # Build a prompt for definitions of multiple economic terms
     prompt = f"""Define the following economic terms.
                 Definitions should be based on the context of the following financial news article.
+                The number of definitions should match the number of economic terms.
                 
                 Example 1
                 Input1 (News Article):
@@ -151,49 +152,49 @@ def get_economic_term_definitions(news_article: str, summary: str, economic_term
                 The article discusses the strong performance of emerging markets in 2017, with a focus on the role of a weak U.S. dollar in driving the rally. Todd Gordon of TradingAnalysis.com suggests that the inverse relationship between the emerging market ETF (EEM) and the U.S. dollar (measured by the UUP ETF) will continue to benefit international and emerging market currencies. Gordon predicts a potential rise in EEM, citing a breakthrough in resistance at $45 and anticipates a rally to $50. He recommends an options trading strategy and sets conditions for exiting the trade. The article also mentions EEM's strong start in the current year, rallying over 1 percent on a specific day.
 
                 Input3 (Economic Terms):
-                Emerging Markets
-                ETF (Exchange-Traded Fund)
-                Rally
-                Weak Dollar
-                Inverse Relationship
-                Currency
-                Resistance and Support
-                Options Contract
-                Premium
-                Maximum Reward
-                Move Higher
-                Call Spread
-                Point of Exit
-                Dollar-tracking ETF (UUP)
-                Performance
-                Annual Performance
-                Point
-                Resistance Broken
-                February 48/50 Call Spread
-                Cut the Trade
+                1. Emerging Markets
+                2. ETF (Exchange-Traded Fund)
+                3. Rally
+                4. Weak Dollar
+                5. Inverse Relationship
+                6. Currency
+                7. Resistance and Support
+                8. Options Contract
+                9. Premium
+                10. Maximum Reward
+                11. Move Higher
+                12. Call Spread
+                13. Point of Exit
+                14. Dollar-tracking ETF (UUP)
+                15. Performance
+                16. Annual Performance
+                17. Point
+                18. Resistance Broken
+                19. February 48/50 Call Spread
+                20. Cut the Trade
 
                 Output:
                 ###
-                A group of countries with developing economies, characterized by rapid industrialization and higher-than-average growth rates.
-                An investment fund that holds a diversified portfolio of assets like stocks or bonds and trades on the stock exchange.
-                A sustained increase in the prices of financial instruments, such as stocks or bonds.
-                A situation where the U.S. dollar has decreased in value compared to other currencies.
-                A situation where the movement of one variable is opposite to the movement of another variable.
-                A system of money used in a particular country or region.
-                Technical analysis terms - Resistance is a price level at which a stock or market tends to stop rising, and support is a price level at which it tends to stop falling.
-                A financial derivative that gives the holder the right, but not the obligation, to buy or sell an asset at a predetermined price before or at the expiration date.
-                The amount paid for an options contract.
-                The maximum profit that can be earned from a trade.
-                Refers to an increase in the price or value of an asset.
-                An options trading strategy involving both buying and selling call options on the same underlying asset with different strike prices or expiration dates.
-                The predetermined level at which an investor decides to sell or exit a trade.
-                An Exchange-Traded Fund that tracks the performance of the U.S. dollar against a basket of other currencies.
-                The result or outcome of an investment over a specific period.
-                The performance of an investment or market over the course of a year.
-                Refers to a unit of measure in price movements.
-                Indicates that the price has surpassed a previously challenging level.
-                Refers to an options trading strategy involving buying a call option with a strike price of $48 and selling a call option with a strike price of $50.
-                Deciding to exit or close a trade position.
+                1. A group of countries with developing economies, characterized by rapid industrialization and higher-than-average growth rates.
+                2. An investment fund that holds a diversified portfolio of assets like stocks or bonds and trades on the stock exchange.
+                3. A sustained increase in the prices of financial instruments, such as stocks or bonds.
+                4. A situation where the U.S. dollar has decreased in value compared to other currencies.
+                5. A situation where the movement of one variable is opposite to the movement of another variable.
+                6. A system of money used in a particular country or region.
+                7. Technical analysis terms - Resistance is a price level at which a stock or market tends to stop rising, and support is a price level at which it tends to stop falling.
+                8. A financial derivative that gives the holder the right, but not the obligation, to buy or sell an asset at a predetermined price before or at the expiration date.
+                9. The amount paid for an options contract.
+                10. The maximum profit that can be earned from a trade.
+                11. Refers to an increase in the price or value of an asset.
+                12. An options trading strategy involving both buying and selling call options on the same underlying asset with different strike prices or expiration dates.
+                13. The predetermined level at which an investor decides to sell or exit a trade.
+                14. An Exchange-Traded Fund that tracks the performance of the U.S. dollar against a basket of other currencies.
+                15. The result or outcome of an investment over a specific period.
+                16. The performance of an investment or market over the course of a year.
+                17. Refers to a unit of measure in price movements.
+                18. Indicates that the price has surpassed a previously challenging level.
+                19. Refers to an options trading strategy involving buying a call option with a strike price of $48 and selling a call option with a strike price of $50.
+                20. Deciding to exit or close a trade position.
 
 
                 Input1 (News Article):
