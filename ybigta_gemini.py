@@ -134,15 +134,15 @@ def detect_economic_terms(news_article: str) -> List[str]:
 
                 Output:
                 ###
-                1. Bitcoin (BTCUSD)
-                2. Moonshot Bet
-                3. Cybersecurity
-                4. Liquidity
-                5. Venture Capital
-                6. Investments
-                7. Facebook Inc. (FB)
-                8. Market Dynamics
-                9. Holdings
+                1. Moonshot bet
+                2. Cryptocurrency
+                3. Venture-capital firm
+                4. Founders Fund
+                5. Cybersecurity
+                6. Liquidity
+                7. Volatile
+                8. Digital currency
+                9. Ripping rise
 
 
                 Input:
@@ -212,7 +212,7 @@ def detect_economic_terms(news_article: str) -> List[str]:
     return economic_terms
 
 
-def get_economic_term_definitions(news_article: str, summary: str, economic_terms: List[str]) -> List[str]:
+def get_economic_term_definitions(news_article: str, economic_terms: List[str]) -> List[str]:
     """
     Gets definitions for given economic terms using a GenerativeModel.
     Definitions are generated based on the context of the input news article.
@@ -284,27 +284,27 @@ def get_economic_term_definitions(news_article: str, summary: str, economic_term
                 The article reports that Founders Fund, a venture-capital firm co-founded by Peter Thiel, has made a significant investment in bitcoin, amounting to hundreds of millions of dollars. This investment is spread across various funds, with one of them starting to invest in mid-2017. The report suggests that the initial investment of $15-20 million has grown substantially due to bitcoin's surge in value over the past year. However, it's unclear whether Founders Fund has sold any of its bitcoin holdings at that point. This move is notable as mainstream investors have been hesitant to embrace bitcoin due to concerns about cybersecurity and liquidity.
 
                 Input3 (Economic Terms):
-                1. Bitcoin (BTCUSD)
-                2. Moonshot Bet
-                3. Cybersecurity
-                4. Liquidity
-                5. Venture Capital
-                6. Investments
-                7. Facebook Inc. (FB)
-                8. Market Dynamics
-                9. Holdings
+                1. Moonshot bet
+                2. Cryptocurrency
+                3. Venture-capital firm
+                4. Founders Fund
+                5. Cybersecurity
+                6. Liquidity
+                7. Volatile
+                8. Digital currency
+                9. Ripping rise
 
                 Output:
                 ###
-                1. A decentralized digital currency subject to market demand and supply dynamics.
-                2. A high-risk, ambitious investment with potential for significant returns.
-                3. Measures taken to protect computer systems, networks, and data from theft, damage, or unauthorized access.
-                4. The ease with which an asset can be bought or sold in the market without affecting its price.
-                5. The provision of financial support to startups or small companies in exchange for equity.
-                6. The allocation of resources with the expectation of generating future returns.
-                7. A well-known social media company.
-                8. The impact of various factors on the behavior of markets and assets.
-                9. The assets or investments held by an individual or entity.
+                1. A high-risk and ambitious investment with the potential for significant returns.
+                2. A type of digital or virtual currency that uses cryptography for security and operates on a decentralized network.
+                3. An investment firm that provides financial backing to startups and small businesses in exchange for ownership equity.
+                4. An influential venture-capital firm co-founded by Peter Thiel that has made substantial investments in various companies.
+                5. Measures and practices to protect computer systems, networks, and data from theft, damage, or unauthorized access.
+                6. The ease with which an asset or security can be bought or sold in the market without affecting its price.
+                7. Subject to rapid and unpredictable changes, often used to describe the price movements of financial instruments.
+                8. A form of currency that exists only in electronic form and lacks a physical counterpart, such as Bitcoin.
+                9. A significant and rapid increase in the value or price of a financial asset.
 
 
                 Input1 (News Article):
