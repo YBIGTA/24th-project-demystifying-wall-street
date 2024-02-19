@@ -1,10 +1,10 @@
-FROM python:3.8-slim
+FROM python:3.9-slim
 ENV PYTHONUNBUFFERED=1
 
 RUN mkdir /app
 WORKDIR /app
 
-RUN pip install django
 COPY . .
+RUN pip install -r requirements.txt
 
 EXPOSE 8000

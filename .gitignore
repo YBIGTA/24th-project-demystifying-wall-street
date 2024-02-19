@@ -1,4 +1,5 @@
 config/__pycache__/
 website/__pycache__/
 *.idea
-ybigta-414314-a438fffa0b91.json
+website/*.json
+website/.env
