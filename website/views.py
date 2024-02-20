@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import *
 import json
 from django.http import JsonResponse
-from .crawling import normal_requests
+from .crawling import url_parser as normal_requests
 from .ybigta_gemini import start as request_gemini
 
 # Create your views here.

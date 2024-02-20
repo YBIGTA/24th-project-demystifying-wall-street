@@ -46,9 +46,9 @@ def url_parser(url):
 
 
 def zenrows(url):
-    client = ZenRowsClient("04b5768a40a0533b80959905b6034b472ad61aa4")
-    user_url = url 
-    params = {"js_render":"true","block_resources":"media,xhr,eventsource,image"}
+    client = ZenRowsClient("082f14fa6fa3089adb71d8ab532ed073a1e4ccde")
+    user_url = url
+    params = {"js_render":"true","block_resources":"image,stylesheet,media,font,script,texttrack,xhr,fetch,eventsource,websocket,manifest,other","js_instructions":"%5B%7B%22click%22%3A%22.selector%22%7D%2C%7B%22wait%22%3A500%7D%2C%7B%22fill%22%3A%5B%22.input%22%2C%22value%22%5D%7D%2C%7B%22wait_for%22%3A%22.slow_selector%22%7D%5D","premium_proxy":"true"}
 
     response = client.get(user_url, params=params)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -59,7 +59,6 @@ def zenrows(url):
     }
 
     return news
-
 
 def apify_news(url):
 
